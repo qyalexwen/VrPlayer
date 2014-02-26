@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Distortions\DistortionBase.cs" />
+    <Compile Include="Distortions\DistortionShader.cs" />
     <Compile Include="Effects\EffectBase.cs" />
     <Compile Include="ILoadable.cs" />
     <Compile Include="IPlugin.cs" />

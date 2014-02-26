@@ -1,35 +1,34 @@
-// Based on Doom 3 BFG Edition GPL Source Code: Copyright (C) 1993-2012 id Software LLC, a ZeniMax Media company. 
+// Oculus Rift barrel distortion shader adapted from Oculus Word Demo.
 
 sampler2D input : register(s0);
+float eyeMode: register(C0);
 
-float factor: register(C0); 
-float xCenter: register(C1); 
-float yCenter: register(C2);
-float blueOffset: register(C3);
-float redOffset: register(C4);
+static const float2 ScreenCenter = float2(0.5f,0.5f);
+static const float2 Scale = float2(0.291612267f, 0.233289823f);
+static const float2 ScaleIn = float2(2.0f, 2.5f);
+static const float4 HmdWarpParam = float4(1.0f, 0.22f, 0.24f, 0.0f);
+static const float	lenseOffset = 0.038f;
 
-float4 main(float2 uv : TEXCOORD) : COLOR 
-{ 
-	const float2 warpCenter = float2( xCenter, yCenter );
-  
-    float2 centeredTexcoord = uv - warpCenter;
-
-	float2	warped = normalize( centeredTexcoord );
-
-	// get it down into the 0 - PI/2 range
-
-  // If radial length was 0.5, we want rescaled to also come out
-  // as 0.5, so the edges of the rendered image are at the edges
-  // of the warped image.
-	float	rescaled = tan( length( centeredTexcoord ) * factor ) / tan( 0.5 * factor );
-
-	warped *= 0.5 * rescaled;
-	warped += warpCenter;
-
-	float4 result = tex2D( input, warped );
-	float2 sampleLoc = (warped - warpCenter) * blueOffset + warped;
-	result.b = tex2D(input,sampleLoc).b;
-	sampleLoc = (warped - warpCenter) * redOffset + warped;
-	result.r = tex2D(input,sampleLoc).r;
-    return result;
+float2 HmdWarp(float2 in01)
+{
+	float2 LensCenter = ScreenCenter - float2(lenseOffset*eyeMode,0.0f);
+	float2 theta = (in01 - LensCenter) * ScaleIn; // Scales to [-1, 1]
+	float rSq = theta.x * theta.x + theta.y * theta.y;
+	float2 rvector = theta * (
+		HmdWarpParam.x +
+		HmdWarpParam.y * rSq +
+		HmdWarpParam.z * rSq * rSq +
+		HmdWarpParam.w * rSq * rSq * rSq
+		);
+	return LensCenter + Scale * rvector;
 }
+
+float4 main(float2 uv : TEXCOORD) : COLOR
+{
+	float2 tc = HmdWarp(uv);
+	if ( any( clamp(tc, float2(0,0), float2(1, 1)) - tc ) )
+	{
+		return 0;
+	}
+	return tex2D( input, tc );
+};

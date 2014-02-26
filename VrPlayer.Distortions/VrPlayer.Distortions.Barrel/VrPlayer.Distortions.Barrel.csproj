@@ -52,6 +52,7 @@
       <DependentUpon>BarrelPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="BarrelPlugin.cs" />
+    <Compile Include="BarrelShader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

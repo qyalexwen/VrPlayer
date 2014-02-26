@@ -145,7 +145,7 @@
                   Grid.ColumnSpan="{Binding Path=Viewport1ColSpan}"  
                   Grid.Row="{Binding Path=Viewport1Row}" 
                   Grid.RowSpan="{Binding Path=Viewport1RowSpan}"
-                  Effect="{Binding Path=State.DistortionPlugin.Content}">
+                  Effect="{Binding Path=State.DistortionPlugin.Content.Left}">
                 <Border Background="Black" ClipToBounds="True">
                     <ContentControl Content="{StaticResource view1}" />
                 </Border>
@@ -157,7 +157,7 @@
                   Grid.ColumnSpan="{Binding Path=Viewport2ColSpan}" 
                   Grid.Row="{Binding Path=Viewport2Row}" 
                   Grid.RowSpan="{Binding Path=Viewport2RowSpan}"
-                  Effect="{Binding Path=State.DistortionPlugin.Content}">
+                  Effect="{Binding Path=State.DistortionPlugin.Content.Right}">
                 <Border Background="Black" ClipToBounds="True">
                     <ContentControl Content="{StaticResource view2}" />
                 </Border>
