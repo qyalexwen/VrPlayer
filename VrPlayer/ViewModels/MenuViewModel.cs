@@ -62,7 +62,7 @@ namespace VrPlayer.ViewModels
 	    {
 	        get
 	        {
-	            return _pluginManager.Medias.Any(media => media.Content.OpenFileCommand.CanExecute(null));
+	            return _pluginManager.Medias.Any(media => media.Content != null && media.Content.OpenFileCommand.CanExecute(null));
 	        }
 	    }
         
@@ -70,7 +70,7 @@ namespace VrPlayer.ViewModels
         {
             get
             {
-                return _pluginManager.Medias.Any(media => media.Content.OpenStreamCommand.CanExecute(null));
+                return _pluginManager.Medias.Any(media => media.Content != null && media.Content.OpenStreamCommand.CanExecute(null));
             }
         }
 
@@ -78,7 +78,7 @@ namespace VrPlayer.ViewModels
         {
             get
             {
-                return _pluginManager.Medias.Any(media => media.Content.OpenDiscCommand.CanExecute(null));
+                return _pluginManager.Medias.Any(media => media.Content != null && media.Content.OpenDiscCommand.CanExecute(null));
             }
         }
 
@@ -86,7 +86,7 @@ namespace VrPlayer.ViewModels
         {
             get
             {
-                return _pluginManager.Medias.Any(media => media.Content.OpenDeviceCommand.CanExecute(null));
+                return _pluginManager.Medias.Any(media => media.Content != null && media.Content.OpenDeviceCommand.CanExecute(null));
             }
         }
 
@@ -94,7 +94,7 @@ namespace VrPlayer.ViewModels
         {
             get
             {
-                return _pluginManager.Medias.Any(media => media.Content.OpenProcessCommand.CanExecute(null));
+                return _pluginManager.Medias.Any(media => media.Content != null && media.Content.OpenProcessCommand.CanExecute(null));
             }
         }
 
