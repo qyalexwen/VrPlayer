@@ -10,7 +10,8 @@
         <VisualBrush x:Key="Media"
                      RenderOptions.CachingHint="Cache"
                      RenderOptions.CacheInvalidationThresholdMaximum="2.0"
-                     RenderOptions.CacheInvalidationThresholdMinimum="0.5">
+                     RenderOptions.CacheInvalidationThresholdMinimum="0.5"
+                     ViewportUnits="Absolute">
             <VisualBrush.Visual>
                 <ContentControl Effect="{Binding Path=State.EffectPlugin.Content}" Content="{Binding Path=State.MediaPlugin.Content.Media}" IsHitTestVisible="False" />
             </VisualBrush.Visual>
