@@ -4,12 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="460" d:DesignWidth="300">
     <StackPanel Orientation="Vertical" Margin="16">
-        <TextBlock Text="Geometry" FontWeight="Bold" Margin="0,0,0,8"></TextBlock>
+        <TextBlock Text="Left" FontWeight="Bold" Margin="0,0,0,8"></TextBlock>
         <Grid Margin="0,0,0,16">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -19,19 +18,43 @@
                 <ColumnDefinition Width="*" MinWidth="200" />
                 <ColumnDefinition Width="50" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Grid.Row="1" Content="Coverage:"></Label>
-            <Slider Grid.Column="1" Grid.Row="1" Value="{Binding Path=Coverage}" Minimum="0" Maximum="0.5"></Slider>
-            <TextBox Grid.Column="2" Grid.Row="1" Text="{Binding Path=Coverage}"></TextBox>
-            <Label Grid.Column="0" Grid.Row="2" Content="Tilt:"></Label>
-            <Slider Grid.Column="1" Grid.Row="2" Value="{Binding Path=Tilt}" Minimum="0" Maximum="360"></Slider>
-            <TextBox Grid.Column="2" Grid.Row="2" Text="{Binding Path=Tilt}"></TextBox>
-            <Label Grid.Column="0" Grid.Row="3" Content="Heading:"></Label>
-            <Slider Grid.Column="1" Grid.Row="3" Value="{Binding Path=Heading}" Minimum="0" Maximum="360"></Slider>
-            <TextBox Grid.Column="2" Grid.Row="3" Text="{Binding Path=Heading}"></TextBox>
+            <Label Grid.Column="0" Grid.Row="0" Content="X Offset:"></Label>
+            <Slider Grid.Column="1" Grid.Row="0" Value="{Binding Path=XLeft}" Minimum="-50" Maximum="50"></Slider>
+            <TextBox Grid.Column="2" Grid.Row="0" Text="{Binding Path=XLeft}"></TextBox>
+            <Label Grid.Column="0" Grid.Row="1" Content="Y Offset:"></Label>
+            <Slider Grid.Column="1" Grid.Row="1" Value="{Binding Path=YLeft}" Minimum="-50" Maximum="50"></Slider>
+            <TextBox Grid.Column="2" Grid.Row="1" Text="{Binding Path=YLeft}"></TextBox>
+            <Label Grid.Column="0" Grid.Row="2" Content="Roll:"></Label>
+            <Slider Grid.Column="1" Grid.Row="2" Value="{Binding Path=RollLeft}" Minimum="-180" Maximum="180"></Slider>
+            <TextBox Grid.Column="2" Grid.Row="2" Text="{Binding Path=RollLeft}"></TextBox>
+        </Grid>
+        <TextBlock Text="Right" FontWeight="Bold" Margin="0,0,0,8"></TextBlock>
+        <Grid Margin="0,0,0,16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" MinWidth="200" />
+                <ColumnDefinition Width="50" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Content="X Offset:"></Label>
+            <Slider Grid.Column="1" Grid.Row="0" Value="{Binding Path=XRight}" Minimum="-50" Maximum="50"></Slider>
+            <TextBox Grid.Column="2" Grid.Row="0" Text="{Binding Path=XRight}"></TextBox>
+            <Label Grid.Column="0" Grid.Row="1" Content="Y Offset:"></Label>
+            <Slider Grid.Column="1" Grid.Row="1" Value="{Binding Path=YRight}" Minimum="-50" Maximum="50"></Slider>
+            <TextBox Grid.Column="2" Grid.Row="1" Text="{Binding Path=YRight}"></TextBox>
+            <Label Grid.Column="0" Grid.Row="2" Content="Roll:"></Label>
+            <Slider Grid.Column="1" Grid.Row="2" Value="{Binding Path=RollRight}" Minimum="-180" Maximum="180"></Slider>
+            <TextBox Grid.Column="2" Grid.Row="2" Text="{Binding Path=RollRight}"></TextBox>
         </Grid>
         <TextBlock Text="FishEye Adjustments" FontWeight="Bold" Margin="0,0,0,8"></TextBlock>
         <Grid Margin="0,0,0,16">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -39,9 +62,15 @@
                 <ColumnDefinition Width="*" MinWidth="190" />
                 <ColumnDefinition Width="80" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Grid.Row="0" Content="FOV:"></Label>
-            <Slider Grid.Column="1" Grid.Row="0" Value="{Binding Path=FishEyeFOV}" Minimum="180" Maximum="360"></Slider>
-            <TextBox Grid.Column="2" Grid.Row="0" Text="{Binding Path=FishEyeFOV}"></TextBox>
+            <Label Grid.Column="0" Grid.Row="0" Content="FOV Horizontal:"></Label>
+            <Slider Grid.Column="1" Grid.Row="0" Value="{Binding Path=FishEyeFOVHorizontal}" Minimum="90" Maximum="360"></Slider>
+            <TextBox Grid.Column="2" Grid.Row="0" Text="{Binding Path=FishEyeFOVHorizontal}"></TextBox>
+            <Label Grid.Column="0" Grid.Row="1" Content="FOV Vertical:"></Label>
+            <Slider Grid.Column="1" Grid.Row="1" Value="{Binding Path=FishEyeFOVVertical}" Minimum="90" Maximum="360"></Slider>
+            <TextBox Grid.Column="2" Grid.Row="1" Text="{Binding Path=FishEyeFOVVertical}"></TextBox>
+            <Label Grid.Column="0" Grid.Row="2" Content="Coverage:"></Label>
+            <Slider Grid.Column="1" Grid.Row="2" Value="{Binding Path=Coverage}" Minimum="0" Maximum="0.5"></Slider>
+            <TextBox Grid.Column="2" Grid.Row="2" Text="{Binding Path=Coverage}"></TextBox>
         </Grid>
         <TextBlock Text="Resolution" FontWeight="Bold" Margin="0,0,0,8"></TextBlock>
         <Grid Margin="0,0,0,16">
