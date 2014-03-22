@@ -6,67 +6,45 @@ using System.Windows.Media.Media3D;
 using VrPlayer.Contracts.Trackers;
 using VrPlayer.Helpers;
 using OpenTK;
+using System.Windows.Media;
 
 namespace VrPlayer.Trackers.OculusRiftTracker
 {
     [DataContract]
     unsafe public class OculusRiftTracker : TrackerBase, ITracker
     {
-        readonly OculusRift rift = new OculusRift();
-
-        private readonly DispatcherTimer _timer;
+        private readonly OculusRift rift = new OculusRift();
+        private TimeSpan lastRenderTime = new TimeSpan(0);
 
         public OculusRiftTracker()
         {
-            _timer = new DispatcherTimer(DispatcherPriority.Send);
-            _timer.Interval = new TimeSpan(0, 0, 0, 0, 15);
-            _timer.Tick += timer_Tick;
+            CompositionTarget.Rendering += UpdateRotation;
+        }
+
+        protected void UpdateRotation(object sender, EventArgs e)
+        {
+            // Event may fire multiple times per render. Don't do unnecessary updates.
+            TimeSpan nextRenderTime = ((RenderingEventArgs)e).RenderingTime;
+            if (nextRenderTime != lastRenderTime)
+            {
+                lastRenderTime = nextRenderTime;
+
+                OpenTK.Quaternion q = rift.PredictedOrientation;
+                RawRotation = new System.Windows.Media.Media3D.Quaternion(q.X, -q.Y, q.Z, -q.W);
+                UpdatePositionAndRotation();
+            }
         }
 
         public override void Load()
         {
-            try
+            if (!IsEnabled)
             {
-                if (!IsEnabled)
-                {
-                    IsEnabled = true;
-                }
+                IsEnabled = true;
             }
-            catch (Exception exc)
-            {
-                Logger.Instance.Error(exc.Message, exc);
-                IsEnabled = false;
-            }
-            _timer.Start();
         }
 
         public override void Unload()
         {
-            _timer.Stop();
-        }
-
-        void timer_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenTK.Quaternion q = rift.PredictedOrientation;
-
-                RawRotation = new System.Windows.Media.Media3D.Quaternion(q.X, -q.Y, q.Z, -q.W);
-
-                UpdatePositionAndRotation();
-            }
-            catch (Exception exc)
-            {
-                Logger.Instance.Error(exc.Message, exc);
-            }
-        }
-
-        private static void ThrowErrorOnResult(int result, string message)
-        {
-            if (result == -1)
-            {
-                throw new Exception(message);
-            }
         }
     }
 }
