@@ -5,20 +5,17 @@ using System.Windows.Threading;
 using System.Windows.Media.Media3D;
 using VrPlayer.Contracts.Trackers;
 using VrPlayer.Helpers;
+using OpenTK;
 
 namespace VrPlayer.Trackers.OculusRiftTracker
 {
     [DataContract]
     unsafe public class OculusRiftTracker : TrackerBase, ITracker
     {
-        [DllImport(@"RiftWrapper.dll")]
-        static extern int OVR_Init();
-
-        [DllImport(@"RiftWrapper.dll", CallingConvention = CallingConvention.Cdecl)]
-        static extern int OVR_Peek(float* w, float* x, float* y, float* z);
+        readonly OculusRift rift = new OculusRift();
 
         private readonly DispatcherTimer _timer;
-            
+
         public OculusRiftTracker()
         {
             _timer = new DispatcherTimer(DispatcherPriority.Send);
@@ -33,8 +30,6 @@ namespace VrPlayer.Trackers.OculusRiftTracker
                 if (!IsEnabled)
                 {
                     IsEnabled = true;
-                    var result = OVR_Init();
-                    ThrowErrorOnResult(result, "Error while initializing the Oculus Rift");
                 }
             }
             catch (Exception exc)
@@ -54,15 +49,13 @@ namespace VrPlayer.Trackers.OculusRiftTracker
         {
             try
             {
-                float w, x, y, z;
-                var result = OVR_Peek(&w, &x, &y, &z);
-                ThrowErrorOnResult(result, "Error while getting data from the Razer Hydra");
+                OpenTK.Quaternion q = rift.PredictedOrientation;
 
-                RawRotation = new Quaternion(x, -y, z, -w);
+                RawRotation = new System.Windows.Media.Media3D.Quaternion(q.X, -q.Y, q.Z, -q.W);
 
                 UpdatePositionAndRotation();
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 Logger.Instance.Error(exc.Message, exc);
             }

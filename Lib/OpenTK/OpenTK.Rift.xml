@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OpenTK.Rift</name>
+    </assembly>
+    <members>
+        <member name="T:OpenTK.OculusRift">
+            <summary>
+            Provides high-level access to an Oculus Rift device.
+            </summary>
+        </member>
+        <member name="M:OpenTK.OculusRift.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenTK.OculusRift"/> class.
+            </summary>
+        </member>
+        <member name="M:OpenTK.OculusRift.Dispose">
+            <summary>
+            Releases all resource used by the <see cref="T:OpenTK.OculusRift"/> object.
+            </summary>
+            <remarks>Call <see cref="M:OpenTK.OculusRift.Dispose"/> when you are finished using the <see cref="T:OpenTK.OculusRift"/>. The
+            <see cref="M:OpenTK.OculusRift.Dispose"/> method leaves the <see cref="T:OpenTK.OculusRift"/> in an unusable state. After calling
+            <see cref="M:OpenTK.OculusRift.Dispose"/>, you must release all references to the <see cref="T:OpenTK.OculusRift"/> so the garbage
+            collector can reclaim the memory that the <see cref="T:OpenTK.OculusRift"/> was occupying.</remarks>
+        </member>
+        <member name="M:OpenTK.OculusRift.Finalize">
+            <summary>
+            Releases unmanaged resources and performs other cleanup operations before the <see cref="T:OpenTK.OculusRift"/>
+            is reclaimed by garbage collection.
+            </summary>
+        </member>
+        <member name="P:OpenTK.OculusRift.IsConnected">
+            <summary>
+            Gets a value indicating whether this instance is connected
+            to an Oculus Rift device.
+            </summary>
+        </member>
+        <member name="P:OpenTK.OculusRift.DesktopX">
+            <summary>
+            Gets the x-coordinate of the Oculus Rift display device,
+            in global desktop coordinates (px).
+            </summary>
+        </member>
+        <member name="P:OpenTK.OculusRift.DesktopY">
+            <summary>
+            Gets the y-coordinate of the Oculus Rift display device,
+            in global desktop coordinates (px).
+            </summary>
+        </member>
+        <member name="P:OpenTK.OculusRift.HResolution">
+            <summary>
+            Horizontal resolution of the entire HMD screen in pixels.
+            Half the HResolution is used for each eye.
+            This value is 1280 for the Development Kit.
+            </summary>
+        </member>
+        <member name="P:OpenTK.OculusRift.VResolution">
+            <summary>
+            Vertical resolution of the entire HMD screen in pixels.
+            This value is 800 for the Development Kit.
+            </summary>
+        </member>
+        <member name="P:OpenTK.OculusRift.HScreenSize">
+            <summary>
+            Horizontal dimension of the entire HMD screen in meters. Half
+            HScreenSize is used for each eye. The current physical screen size is
+            149.76 x 93.6mm, which will be reported as 0.14976f x 0.0935f.
+            </summary>
+        </member>
+        <member name="P:OpenTK.OculusRift.VScreenSize">
+            <summary>
+            Vertical dimension of the entire HMD screen in meters. Half
+            HScreenSize is used for each eye. The current physical screen size is
+            149.76 x 93.6mm, which will be reported as 0.14976f x 0.0935f.
+            </summary>
+        </member>
+        <member name="P:OpenTK.OculusRift.VScreenCenter">
+            <summary>
+            Physical offset from the top of the screen to eye center, in meters.
+            Currently half VScreenSize.
+            </summary>
+        </member>
+        <member name="P:OpenTK.OculusRift.LensSeparationDistance">
+            <summary>
+            Physical distance between the lens centers, in meters. Lens centers
+            are the centers of distortion.
+            </summary>
+        </member>
+        <member name="P:OpenTK.OculusRift.InterpupillaryDistance">
+            <summary>
+            Configured distance between eye centers.
+            </summary>
+        </member>
+        <member name="P:OpenTK.OculusRift.EyeToScreenDistance">
+            <summary>
+            Distance from the eye to the screen, in meters. It combines
+            distances from the eye to the lens, and from the lens to the screen.
+            This value is needed to compute the fov correctly.
+            </summary>
+        </member>
+        <member name="P:OpenTK.OculusRift.DistortionK">
+            <summary>
+            Gets the radial distortion correction coefficients.
+            </summary>
+            <value>The distortion k.</value>
+        </member>
+        <member name="P:OpenTK.OculusRift.ChromaAbAberration">
+            <summary>
+            Gets the chroma AB aberration coefficients.
+            </summary>
+        </member>
+        <member name="P:OpenTK.OculusRift.Orientation">
+            <summary>
+            Gets a <see cref="T:OpenTK.Quaternion"/> representing
+            the current accumulated orientation. Most applications
+            will want to use <see cref="P:OpenTK.OculusRift.PredictedOrientation"/> instead.
+            Use <see cref="M:OpenTK.Quaternion.ToAxisAngle"/> to
+            convert this quaternion to an axis-angle representation.
+            Use <see cref="M:OpenTK.Matrix4.CreateFromQuaternion(OpenTK.Quaternion)"/>
+            to convert this quaternion to a rotation matrix.
+            </summary>
+        </member>
+        <member name="P:OpenTK.OculusRift.PredictedOrientation">
+            <summary>
+            Gets a <see cref="T:OpenTK.Quaternion"/> representing
+            the predicted orientation after <see cref="P:OpenTK.OculusRift.PredictionDelta"/>
+            seconds.
+            </summary>
+        </member>
+        <member name="P:OpenTK.OculusRift.Acceleration">
+            <summary>
+            Gets the last absolute acceleration reading, in m/s^2.
+            </summary>
+            <value>The acceleration.</value>
+        </member>
+        <member name="P:OpenTK.OculusRift.AngularVelocity">
+            <summary>
+            Gets the last angular velocity reading, in rad/s.
+            </summary>
+            <value>The angular velocity.</value>
+        </member>
+        <member name="P:OpenTK.OculusRift.PredictionDelta">
+            <summary>
+            Gets or sets the delta time for sensor prediction, in seconds.
+            </summary>
+        </member>
+        <member name="P:OpenTK.OculusRift.IsPredictionEnabled">
+            <summary>
+            Gets a value indicating whether sensor prediction is enabled.
+            </summary>
+        </member>
+    </members>
+</doc>
