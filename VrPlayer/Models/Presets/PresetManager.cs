@@ -299,11 +299,10 @@ namespace VrPlayer.Models.Presets
                     if (plugin != null)
                     {
                         _state.ProjectionPlugin = plugin;
-                        var token = projection["Params"];
-                        if (token is JProperty)
+                        if (projection["Params"] != null)
                         {
-                            var prop = token as JProperty;
-                            Inject(plugin.Content, prop.Value);
+                            var token = projection["Params"];
+                            Inject(plugin.Content, token);
                         }
                     }
                 }
@@ -315,11 +314,10 @@ namespace VrPlayer.Models.Presets
                     if (plugin != null)
                     {
                         _state.EffectPlugin = plugin;
-                        var token = effect["Params"];
-                        if (token is JProperty)
+                        if (effect["Params"] != null)
                         {
-                            var prop = token as JProperty;
-                            Inject(plugin.Content, prop.Value);
+                            var token = effect["Params"];
+                            Inject(plugin.Content, token);
                         }
                     }
                 }
@@ -331,11 +329,10 @@ namespace VrPlayer.Models.Presets
                     if (plugin != null)
                     {
                         _state.StabilizerPlugin = plugin;
-                        var token = stabilizer["Params"];
-                        if (token is JProperty)
+                        if (stabilizer["Params"] != null)
                         {
-                            var prop = token as JProperty;
-                            Inject(plugin.Content, prop.Value);
+                            var token = stabilizer["Params"];
+                            Inject(plugin.Content, token);
                         }
                     }
                 }
